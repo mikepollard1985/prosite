@@ -1,32 +1,72 @@
 <template>
-	<div class="body">
-		<app-header></app-header>
-		<video autoplay muted loop class="psite-video-background">
-			<source src="../assets/video/background-blur.mp4" type="video/mp4">
-		</video>
+	<div class="psite">
+		<div class="psite-header">
+			<app-header/>
+		</div>
+		<!-- <full-page
+			ref="fullpage"
+			:skip-init="true"
+			:options="fp_options">
+			<div class="section"> -->
+				<app-home
+					/>
+			<!-- </div> -->
+			<!-- <div class="section"> -->
+				<app-about/>
+			<!-- </div> -->
+			<!-- <div class="section"> -->
+				<app-resume/>
+			<!-- </div> -->
+			<!-- <div class="section"> -->
+				<app-gbuilds/>
+			<!-- </div> -->
+			<!-- <div class="section"> -->
+				<app-contact/>
+			<!-- </div> -->
+		<!-- </full-page> -->
 	</div>
 </template>
 
 <script>
-import AppHeader from './AppHeader.vue'
-export default {
-	name: 'app-main',
-	components: {
-		AppHeader
-	},
-	data() {
-		return {
-			video_source: '../assets/video/background-noblur.mp4'
+	import AppHeader from './AppHeader.vue'
+	import AppHome from './AppHome.vue'
+	import AppAbout from './AppAbout.vue'
+	import AppResume from './AppResume.vue'
+	import AppGbuilds from './AppGbuilds.vue'
+	import AppContact from './AppContact.vue'
+
+	export default {
+		name: 'app-main',
+		components: {
+			AppHeader,
+			AppHome,
+			AppAbout,
+			AppResume,
+			AppGbuilds,
+			AppContact
+		},
+		data() {
+			return {
+				fp_options: {
+					licenseKey: 'GPLv3',
+			        menu: '#psite-header',
+			        anchors: ['psite-home', 'psite-about', 'psite-resume', 'psite-gbuilds', 'psite-contact'],
+				},
+				fp_ref: {}
+			}
+		},
+
+		mounted() {
+			this.fp_ref = this.$refs.fullpage
+			this.$refs.fullpage.init()
+			window.ps = this
 		}
 	}
-}
 </script>
-u
 <style lang="scss">
-	.body {
-		// background: #595959;
-		.psite-video-background {
-			width: 100%;
+	.psite {
+		.psite-body {
+			display: block;
 		}
 	}
 </style>
